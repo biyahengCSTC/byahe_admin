@@ -15,7 +15,7 @@ import axios from "../../config/axios";
 export default function Survey() {
   const [survey, setSurvey] = useState([]);
   useEffect(() => {
-    axios.get("/survey").then((response) => {
+    axios.get("/survey/counts").then((response) => {
       setSurvey(response.data);
     });
   }, []);
