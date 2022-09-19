@@ -14,17 +14,22 @@ import axios from "../../config/axios";
 export default function AddCampus(props) {
   const [name, setName] = useState("");
   const [tour_url, setTour] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("tour_url", tour_url);
+  formData.append("images", selectedFile);
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await axios.post(`/campus`, { name, tour_url });
+      await axios.post(`/campus`, formData);
       window.location.href = "/admin/campuses";
     } catch (error) {
-      if (name === "" || tour_url === "") {
-        console.log("catch", error.response.data);
-        setErrorMsg(error.response.data.error[0]);
+      if (name === "" || tour_url === "" || selectedFile === "") {
+        setErrorMsg("Fields not allowed to be empty!");
       } else {
         setErrorMsg(error.response.data.message);
       }
@@ -36,6 +41,13 @@ export default function AddCampus(props) {
     } else {
       setTour(e.target.value);
     }
+  };
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
+    console.log(
+      "🚀 ~ file: Add.js ~ line 24 ~ handleFileSelect ~ event.target.files[0]",
+      event.target.files[0]
+    );
   };
   return (
     <main>
@@ -78,6 +90,14 @@ export default function AddCampus(props) {
                 variant="standard"
                 value={tour_url}
                 onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <input
+                id="images"
+                name="images"
+                type="file"
+                onChange={handleFileSelect}
               />
             </Grid>
           </Grid>

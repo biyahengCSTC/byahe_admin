@@ -21,6 +21,10 @@ export default function AddTrivia(props) {
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
+    console.log(
+      "🚀 ~ file: Add.js ~ line 24 ~ handleFileSelect ~ event.target.files[0]",
+      event.target.files[0]
+    );
   };
   const formData = new FormData();
   formData.append("name", name);

@@ -98,6 +98,9 @@ export default function StickyHeadTable(props) {
                         >
                           <TableCell align="left">{row.name}</TableCell>
                           <TableCell align="left">{row.tour_url}</TableCell>
+                          <TableCell align="left">
+                            <img src={row.images} alt="Logo" width="100" />
+                          </TableCell>
                           <TableCell align="right">
                             <Button
                               variant="text"

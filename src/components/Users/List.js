@@ -24,9 +24,14 @@ const columns = [
 
 export default function StickyHeadTable(props) {
   const [rows, setRows] = useState([]);
+  console.log("🚀 ~ file: List.js ~ line 27 ~ StickyHeadTable ~ rows", rows);
 
   useEffect(() => {
     axios.get("/user").then((response) => {
+      console.log(
+        "🚀 ~ file: List.js ~ line 31 ~ axios.get ~ response",
+        response
+      );
       setRows(response.data);
     });
   }, []);

@@ -4,16 +4,16 @@ const instance = axios.create();
 instance.interceptors.request.use(
   function (config) {
     config.baseURL = "https://byaheng-cstc-api.herokuapp.com";
-    //config.baseURL = "http://localhost:8080";
+    // config.baseURL = "http://localhost:8080";
     config.headers.post["Content-Type"] = "application/json;charset=utf-8";
     config.headers["Access-Control-Allow-Origin"] = "*";
     config.headers["Access-Control-Allow-Methods"] = "GET,PUT,POST,DELETE";
     config.headers["Access-Control-Allow-Headers"] =
       "Origin, X-Requested-With, Content-Type, Accept";
     config.headers["Access-Control-Allow-Credentials"] = true;
-    config.headers["Set-Cookie"] = [
-      "visited=true; Max-Age=3000; HttpOnly, Secure",
-    ];
+    // config.headers["Set-Cookie"] = [
+    //   "visited=true; Max-Age=3000; HttpOnly, Secure",
+    // ];
     return config;
   },
   function (error) {

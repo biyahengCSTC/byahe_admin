@@ -24,8 +24,7 @@ export default function AddCampus(props) {
       window.location.href = "/admin/campuses";
     } catch (error) {
       if (name === "" || tour_url === "") {
-        console.log("catch", error.response.data);
-        setErrorMsg(error.response.data.error[0]);
+        setErrorMsg("Fields not allowed to be empty!");
       } else {
         setErrorMsg(error.response.data.message);
       }
