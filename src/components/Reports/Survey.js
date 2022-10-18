@@ -21,7 +21,12 @@ export default function Survey() {
   }, []);
   return (
     <Box>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Survey Result
       </Typography>{" "}
       <Table size="small">

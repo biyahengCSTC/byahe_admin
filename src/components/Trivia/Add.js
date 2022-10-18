@@ -54,7 +54,12 @@ export default function AddTrivia(props) {
   };
   return (
     <main>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Trivia
       </Typography>
 

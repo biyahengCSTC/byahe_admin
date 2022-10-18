@@ -1,9 +1,9 @@
 import { React, useState } from "react";
 import List from "./List";
 import Add from "./Add";
-import { Box, Toolbar } from "@mui/material";
+import { Box, Toolbar, Grid, Container } from "@mui/material";
 import Footer from "../Footer";
-import NavBar from "../NavBar";
+import NavBar from "../NavBars";
 
 export default function Course() {
   const [display, setDisplay] = useState("list");
@@ -43,12 +43,27 @@ export default function Course() {
     <main>
       <Box sx={{ display: "flex" }}>
         <NavBar navClick={handleNav} />
-        <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
           <Toolbar />
-          <Box sx={{ p: 3, mb: 25 }}>
-            {display == "list" && <List addClick={handleAdd} />}
-            {display == "add" && <Add cancelClick={handleCancel} />}
-          </Box>
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 50 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={12} lg={12}>
+                {display == "list" && <List addClick={handleAdd} />}
+                {display == "add" && <Add cancelClick={handleCancel} />}
+              </Grid>
+            </Grid>
+          </Container>
           <Footer />
         </Box>
       </Box>

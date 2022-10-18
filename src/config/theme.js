@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
@@ -12,6 +12,10 @@ const theme = createTheme({
       main: "#134611",
     },
   },
+  typography: {
+    fontFamily: "PoppinsRegular",
+  },
 });
 
+responsiveFontSizes(theme);
 export default theme;

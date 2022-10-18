@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
   Grid,
   Box,
@@ -8,6 +8,11 @@ import {
   Container,
   Paper,
   Alert,
+  InputLabel,
+  Select,
+  MenuItem,
+  InputBase,
+  FormControl,
 } from "@mui/material";
 import axios from "../../config/axios";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -21,6 +26,8 @@ export default function AddTrivia(props) {
   const [errorMsg, setErrorMsg] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [success, setSuccess] = useState("");
+  const [campusID, setCampuses] = useState("");
+  const [campus, setCampus] = useState([]);
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -48,11 +55,25 @@ export default function AddTrivia(props) {
     setdate(e);
   };
   const handleChange = (e) => {
-    setName(e.target.value);
+    if (e.target.name === "name") {
+      setName(e.target.value);
+    } else if (e.target.name === "campusID") {
+      setCampuses(e.target.value);
+    }
   };
+  useEffect(() => {
+    axios.get("/campus").then((response) => {
+      setCampus(response.data);
+    });
+  }, []);
   return (
     <main>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Activities
       </Typography>
 
@@ -72,7 +93,7 @@ export default function AddTrivia(props) {
                 required
                 id="name"
                 name="name"
-                label="Question"
+                label="Name of Activity"
                 fullWidth
                 autoComplete="given-name"
                 variant="standard"
@@ -81,15 +102,37 @@ export default function AddTrivia(props) {
               />
             </Grid>
             <Grid item xs={12}>
+              <FormControl margin="normal" fullWidth>
+                <InputLabel id="demo-simple-select-helper-label">
+                  Campus
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  value={campusID}
+                  name="campusID"
+                  label="Campus"
+                  onChange={handleChange}
+                >
+                  {campus.map((page) => (
+                    <MenuItem value={page.id} key={page.id}>
+                      {page.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>{" "}
+            </Grid>{" "}
+            <Grid item xs={12}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DesktopDatePicker
+                  fullwidth
                   id="date"
                   name="date"
                   label="Date"
                   inputFormat="MM/dd/yyyy"
                   value={date}
                   onChange={handleDate}
-                  renderInput={(params) => <TextField {...params} />}
+                  renderInput={(params) => <TextField {...params} fullWidth />}
                 />
               </LocalizationProvider>
             </Grid>

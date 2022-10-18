@@ -1,11 +1,19 @@
 import { React, useState } from "react";
 import List from "./List";
-import { Box, Toolbar } from "@mui/material";
+import Add from "./Add";
+import { Box, Toolbar, Container, Grid } from "@mui/material";
 import Footer from "../Footer";
-import NavBar from "../NavBar";
+import NavBar from "../NavBars";
 
 export default function User() {
   let [nav, setNav] = useState(0);
+  const [display, setDisplay] = useState("list");
+  const handleAdd = async () => {
+    setDisplay("add");
+  };
+  const handleCancel = async () => {
+    setDisplay("list");
+  };
   const handleNav = (event, index) => {
     switch (index) {
       case 1:
@@ -35,11 +43,27 @@ export default function User() {
     <main>
       <Box sx={{ display: "flex" }}>
         <NavBar navClick={handleNav} />
-        <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
           <Toolbar />
-          <Box sx={{ p: 3, mb: 50 }}>
-            <List />
-          </Box>
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 50 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={12} lg={12}>
+                {display == "list" && <List addClick={handleAdd} />}
+                {display == "add" && <Add cancelClick={handleCancel} />}
+              </Grid>
+            </Grid>
+          </Container>
           <Footer />
         </Box>
       </Box>

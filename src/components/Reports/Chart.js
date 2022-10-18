@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
   LineChart,
@@ -8,7 +8,7 @@ import {
   Label,
   ResponsiveContainer,
 } from "recharts";
-// Generate Sales Data
+import axios from "../../config/axios";
 function createData(time, amount) {
   return { time, amount };
 }
@@ -24,14 +24,22 @@ const data = [
   createData("21:00", 2400),
   createData("24:00", undefined),
 ];
+console.log("🚀 ~ file: Chart.js ~ line 27 ~ data", data);
 
 export default function Chart() {
   const theme = useTheme();
+  const [count, setCount] = useState([]);
+  console.log("🚀 ~ file: Chart.js ~ line 31 ~ Chart ~ count", count);
+  useEffect(() => {
+    axios.get("/user/count").then((response) => {
+      setCount(response.data);
+    });
+  }, []);
 
   return (
     <ResponsiveContainer>
       <LineChart
-        data={data}
+        data={count}
         margin={{
           top: 16,
           right: 16,
@@ -40,7 +48,7 @@ export default function Chart() {
         }}
       >
         <XAxis
-          dataKey="time"
+          dataKey="date"
           stroke={theme.palette.text.secondary}
           style={theme.typography.body2}
         />
@@ -57,13 +65,13 @@ export default function Chart() {
               ...theme.typography.body1,
             }}
           >
-            Visitors
+            Daily Visitors
           </Label>
         </YAxis>
         <Line
           isAnimationActive={false}
           type="monotone"
-          dataKey="amount"
+          dataKey="value"
           stroke={theme.palette.primary.main}
           dot={false}
         />

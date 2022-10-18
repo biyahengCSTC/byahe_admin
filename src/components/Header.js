@@ -85,10 +85,11 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const session = JSON.parse(localStorage.getItem("session"));
   async function handleLogout(e) {
     e.preventDefault();
     try {
-      await axios.put("/signout");
+      await axios.put(`/signout/${session.data.id}`);
       localStorage.clear();
       window.location.href = "/signin";
     } catch (error) {

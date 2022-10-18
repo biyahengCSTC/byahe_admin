@@ -63,7 +63,12 @@ export default function StickyHeadTable(props) {
   };
   return (
     <Box sx={{ width: "100%" }}>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Course
       </Typography>
       {updateData === "" && (

@@ -52,10 +52,17 @@ export default function StickyHeadTable(props) {
   }
   return (
     <Box sx={{ width: "100%" }}>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         User
       </Typography>
-
+      <Button variant="contained" sx={{ my: 1 }} onClick={props.addClick}>
+        Add Other Administrator
+      </Button>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import NavBar from "./NavBar";
+import NavBar from "./NavBars";
 import Chart from "./Reports/Chart";
 import Prenrollment from "./Reports/Pre-enrollment";
 import Survey from "./Reports/Survey";
@@ -50,13 +50,24 @@ export default function Dashboard() {
     <main>
       <Box sx={{ display: "flex" }}>
         <NavBar navClick={handleNav} />
-        <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 25 }}>
             <Typography
               variant="h6"
               color="primary"
-              fontWeight="bold"
+              fontFamily="PoppinsBold"
               gutterBottom
             >
               Today

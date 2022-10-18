@@ -11,7 +11,12 @@ export default function PreEnrollment() {
   }, []);
   return (
     <Box>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Daily Pre-Enrollment
       </Typography>{" "}
       <Typography component="p" variant="h4">

@@ -31,6 +31,10 @@ export default function StickyHeadTable(props) {
   const [id, setID] = useState("");
   useEffect(() => {
     axios.get("/activities").then((response) => {
+      console.log(
+        "🚀 ~ file: List.js ~ line 34 ~ axios.get ~ response",
+        response
+      );
       setRows(response.data);
     });
   }, []);
@@ -62,7 +66,12 @@ export default function StickyHeadTable(props) {
   };
   return (
     <Box sx={{ width: "100%" }}>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Activity
       </Typography>
       {updateData === "" && (

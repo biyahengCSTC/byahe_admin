@@ -42,7 +42,12 @@ export default function AddCampus(props) {
   };
   return (
     <main>
-      <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+      <Typography
+        variant="h6"
+        color="primary"
+        fontFamily="PoppinsBold"
+        gutterBottom
+      >
         Frequently Ask Question
       </Typography>
 
