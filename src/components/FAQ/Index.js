@@ -1,7 +1,7 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import List from "./List";
 import Add from "./Add";
-import { Box, Toolbar ,Container,Grid} from "@mui/material";
+import { Box, Toolbar, Container, Grid } from "@mui/material";
 import Footer from "../Footer";
 import NavBar from "../NavBars";
 
@@ -39,6 +39,12 @@ export default function FAQ() {
     }
     setNav(index);
   };
+  const session = JSON.parse(localStorage.getItem("session"));
+  useEffect(() => {
+    if (session === null) {
+      window.location.href = "/signin";
+    }
+  }, []);
   return (
     <main>
       <Box sx={{ display: "flex" }}>

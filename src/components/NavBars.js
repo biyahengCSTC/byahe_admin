@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   AccountCircle,
   Logout,
+  Person,
 } from "@mui/icons-material";
 import {
   CssBaseline,
@@ -129,7 +130,7 @@ export default function NavBar(props) {
     try {
       await axios.put(`/signout/${session.data.id}`);
       localStorage.clear();
-      window.location.href = "/signin";
+      window.location.href = "/";
     } catch (error) {
       console.log("catch", error);
     }
@@ -152,6 +153,16 @@ export default function NavBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem>
+        <ListItemButton>
+          <ListItemIcon>
+            <Person fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>
+            {session.data.id > 1 ? session.data.first_name : "Byaheng CSTC"}
+          </ListItemText>
+        </ListItemButton>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <ListItemButton onClick={handleLogout}>
           <ListItemIcon>

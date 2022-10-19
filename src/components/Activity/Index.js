@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import List from "./List";
 import Add from "./Add";
 import { Box, Toolbar, Grid, Container } from "@mui/material";
@@ -39,6 +39,12 @@ export default function Activities() {
     }
     setNav(index);
   };
+  const session = JSON.parse(localStorage.getItem("session"));
+  useEffect(() => {
+    if (session === null) {
+      window.location.href = "/";
+    }
+  }, []);
   return (
     <main>
       <Box sx={{ display: "flex" }}>

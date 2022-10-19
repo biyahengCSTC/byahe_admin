@@ -18,6 +18,7 @@ import axios from "../../config/axios";
 const columns = [
   { id: "name", label: "Name", minWidth: 200 },
   { id: "email", label: "Email Address", minWidth: 150 },
+  { id: "role", label: "Role", minWidth: 150 },
   { id: "status", label: "Status", minWidth: 150 },
   { id: "actions", label: "", minWidth: 200 },
 ];
@@ -93,8 +94,16 @@ export default function StickyHeadTable(props) {
                       <TableCell align="left">{`${row.first_name} ${row.last_name}`}</TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">
+                        {row.roleID === 1
+                          ? "Admin"
+                          : row.roleID > 2
+                          ? "Visitor"
+                          : "Student"}
+                      </TableCell>
+                      <TableCell align="left">
                         {row.status === 0 ? "Pending" : "Accepted"}
                       </TableCell>
+
                       <TableCell align="right">
                         <Button
                           variant="text"

@@ -84,6 +84,8 @@ export default function AddAdmin(props) {
                   {errorMsg}
                 </Alert>
               )}
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <TextField
                 required
                 id="first_name"
@@ -109,7 +111,7 @@ export default function AddAdmin(props) {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
               <TextField
                 required
                 id="address"

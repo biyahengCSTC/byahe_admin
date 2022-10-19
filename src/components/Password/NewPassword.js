@@ -31,7 +31,7 @@ export default function NewPassword() {
         res
       );
       setnotsend(!notsend);
-      window.location.href = "/signin";
+      window.location.href = "/";
     } catch (error) {
       if (password === "") {
         setErrorMsg(error.response.data.error[0]);

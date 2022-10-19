@@ -43,7 +43,7 @@ export default function Dashboard() {
   const session = JSON.parse(localStorage.getItem("session"));
   useEffect(() => {
     if (session === null) {
-      window.location.href = "/signin";
+      window.location.href = "/";
     }
   }, []);
   return (

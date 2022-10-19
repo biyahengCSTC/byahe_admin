@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import List from "./List";
 import Add from "./Add";
 import { Box, Toolbar, Container, Grid } from "@mui/material";
@@ -14,6 +14,12 @@ export default function User() {
   const handleCancel = async () => {
     setDisplay("list");
   };
+  const session = JSON.parse(localStorage.getItem("session"));
+  useEffect(() => {
+    if (session === null) {
+      window.location.href = "/";
+    }
+  }, []);
   const handleNav = (event, index) => {
     switch (index) {
       case 1:

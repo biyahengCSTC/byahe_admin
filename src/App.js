@@ -18,7 +18,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route exact path="signin" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           <Route exact path="admin/dashboard" element={<Dashboard />} />
           <Route exact path="admin/campuses" element={<Campus />} />
           <Route exact path="admin/courses" element={<Course />} />
@@ -34,6 +34,11 @@ function App() {
           <Route
             exact
             path={`signin/password-reset/:id/:token`}
+            element={<NewPassword />}
+          />
+          <Route
+            exact
+            path={`signin/password-setup/:id/:token`}
             element={<NewPassword />}
           />
         </Routes>
