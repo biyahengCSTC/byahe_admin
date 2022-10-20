@@ -35,6 +35,7 @@ export default function AddTrivia(props) {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("date", date);
+  formData.append("campusID", campusID);
   formData.append("images", selectedFile);
 
   async function handleSubmit(e) {
@@ -111,6 +112,7 @@ export default function AddTrivia(props) {
                   id="demo-simple-select-helper"
                   value={campusID}
                   name="campusID"
+                  variant="standard"
                   label="Campus"
                   onChange={handleChange}
                 >
@@ -129,6 +131,7 @@ export default function AddTrivia(props) {
                   id="date"
                   name="date"
                   label="Date"
+                  variant="standard"
                   inputFormat="MM/dd/yyyy"
                   value={date}
                   onChange={handleDate}
