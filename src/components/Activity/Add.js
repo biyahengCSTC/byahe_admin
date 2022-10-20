@@ -35,7 +35,7 @@ export default function AddTrivia(props) {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("date", date);
-  formData.append("campusID", campusID);
+  formData.append("campus", campusID);
   formData.append("images", selectedFile);
 
   async function handleSubmit(e) {
