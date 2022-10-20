@@ -9,7 +9,7 @@ instance.interceptors.request.use(
     config.headers["Access-Control-Allow-Origin"] = "*";
     config.headers["Access-Control-Allow-Methods"] = "GET,PUT,POST,DELETE";
     config.headers["Access-Control-Allow-Headers"] =
-      "Origin, X-Requested-With, Content-Type, Accept";
+      "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization";
     config.headers["Access-Control-Allow-Credentials"] = true;
     return config;
   },
