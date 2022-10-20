@@ -6,8 +6,7 @@ instance.interceptors.request.use(
     config.baseURL = "https://byaheng-cstc-api.herokuapp.com";
     // config.baseURL = "http://localhost:8080";
     config.headers.post["Content-Type"] = "application/json;charset=utf-8";
-    config.headers["Access-Control-Allow-Origin"] =
-      "https://byaheng-cstc-api.herokuapp.com";
+    config.headers["Access-Control-Allow-Origin"] = "*";
     config.headers["Access-Control-Allow-Methods"] = "GET,PUT,POST,DELETE";
     config.headers["Access-Control-Allow-Headers"] =
       "Origin, X-Requested-With, Content-Type, Accept";
