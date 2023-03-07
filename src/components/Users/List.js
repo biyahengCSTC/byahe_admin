@@ -19,7 +19,7 @@ const columns = [
   { id: "name", label: "Name", minWidth: 200 },
   { id: "email", label: "Email Address", minWidth: 150 },
   { id: "role", label: "Role", minWidth: 150 },
-  { id: "status", label: "Status", minWidth: 150 },
+  { id: "status", label: "Mobile Number", minWidth: 150 },
   { id: "actions", label: "", minWidth: 200 },
 ];
 
@@ -100,21 +100,11 @@ export default function StickyHeadTable(props) {
                           ? "Visitor"
                           : "Student"}
                       </TableCell>
-                      <TableCell align="left">
+                      {/* <TableCell align="left">
                         {row.status === 0 ? "Pending" : "Accepted"}
-                      </TableCell>
+                      </TableCell> */}
 
-                      <TableCell align="right">
-                        <Button
-                          variant="text"
-                          color={row.status === 0 ? "primary" : "error"}
-                          onClick={() => {
-                            handleAccept(row.id);
-                          }}
-                        >
-                          {row.status === 0 ? "Accept" : "Reject"}
-                        </Button>
-                      </TableCell>
+                      <TableCell align="left">{row.mobile}</TableCell>
                     </TableRow>
                   );
                 })}
