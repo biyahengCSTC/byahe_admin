@@ -8,30 +8,40 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Button,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
   Box,
   Typography,
   Stack,
+  Grid,
 } from "@mui/material";
-import DeleteModal from "../DeleteModal";
-import Update from "./Update";
 import axios from "../../config/axios";
 
 const columns = [
   { id: "name", label: "Course", minWidth: 200 },
-  { id: "date", label: "Code", minWidth: 150 },
-  { id: "image", label: "Slot", minWidth: 150 },
-  { id: "actions", label: "", minWidth: 200 },
+  { id: "email", label: "Email Address", minWidth: 150 },
+  { id: "contact", label: "Contact Number", minWidth: 150 },
+  { id: "subject", label: "Subject", minWidth: 200 },
+  { id: "message", label: "Message", minWidth: 200 },
+  { id: "date", label: "Date", minWidth: 200 },
 ];
 
 export default function StickyHeadTable(props) {
   const [rows, setRows] = useState([]);
-  const [modal, setModal] = useState(false);
   const [updateData, setupdateData] = useState("");
-  const [id, setID] = useState("");
+  const [courses, setCourse] = useState([]);
+  const [courseCode, setCoursCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios.get("/courses").then((response) => {
+      setCourse(response.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("/contact").then((response) => {
       setRows(response.data);
     });
   }, []);
@@ -47,20 +57,12 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
-  const handleOpen = (value) => {
-    setID(value);
-    setModal(!modal);
+  const handleFilterCourse = async (courseCode) => {
+    setCoursCode(courseCode);
+    const res = await axios.get(`/contact?course=${courseCode}`);
+    setRows(res.data);
   };
-  const handleDelete = () => {
-    axios.delete(`/courses/${id}`);
-    window.location.reload(false);
-  };
-  const closeDelete = () => {
-    setModal(false);
-  };
-  const handleEdit = (value) => {
-    setupdateData(value);
-  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Typography
@@ -69,16 +71,40 @@ export default function StickyHeadTable(props) {
         fontFamily="PoppinsBold"
         gutterBottom
       >
-        Course
+        User Feedback
       </Typography>
       {updateData === "" && (
         <Box>
-          <Button variant="contained" sx={{ my: 1 }} onClick={props.addClick}>
-            Add New Course
-          </Button>
+          <Box sx={{ width: "100%", overflow: "visible", marginBottom: 5 }}>
+            <Grid container spacing={2} sx={{ mt: 2 }}>
+              <Grid item xs={12} sm={3}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-controlled-open-select-label">
+                    Course
+                  </InputLabel>
+                  <Select
+                    labelId="demo-controlled-open-select-label"
+                    id="demo-controlled-open-select"
+                    name="course"
+                    label="Course"
+                    value={courseCode}
+                    onChange={(searchVal) =>
+                      handleFilterCourse(searchVal.target.value)
+                    }
+                  >
+                    {courses.map((data, i) => (
+                      <MenuItem value={data.courseCode} key={i}>
+                        {data.courseCode}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+          </Box>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table">
+              <Table>
                 <TableHead>
                   <TableRow>
                     {columns.map((column) => (
@@ -101,26 +127,14 @@ export default function StickyHeadTable(props) {
                           hover
                           role="checkbox"
                           tabIndex={-1}
-                          key={row.name}
+                          key={row.id}
                         >
-                          <TableCell align="left">{row.name}</TableCell>
-                          <TableCell align="left">{row.courseCode}</TableCell>
-                          <TableCell align="left">{row.slot}</TableCell>
-                          <TableCell align="right">
-                            <Button
-                              variant="text"
-                              onClick={() => handleEdit(row)}
-                            >
-                              Update
-                            </Button>
-                            <Button
-                              variant="text"
-                              color="error"
-                              onClick={() => handleOpen(row.id)}
-                            >
-                              Delete
-                            </Button>
-                          </TableCell>
+                          <TableCell align="left">{row.course}</TableCell>
+                          <TableCell align="left">{row.email}</TableCell>
+                          <TableCell align="left">{row.contact}</TableCell>
+                          <TableCell align="left">{row.subject}</TableCell>
+                          <TableCell align="left">{row.message}</TableCell>
+                          <TableCell align="left">{row.date}</TableCell>
                         </TableRow>
                       );
                     })}
@@ -146,12 +160,6 @@ export default function StickyHeadTable(props) {
           </Paper>
         </Box>
       )}
-      <DeleteModal
-        values={modal}
-        openModal={closeDelete}
-        deleteItem={handleDelete}
-      />
-      {updateData !== "" && <Update data={updateData} />}
     </Box>
   );
 }

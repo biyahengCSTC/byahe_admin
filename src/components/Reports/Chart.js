@@ -1,81 +1,60 @@
 import { React, useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Label,
-  ResponsiveContainer,
-} from "recharts";
+import { Typography, Box } from "@mui/material";
+import { PieChart, Pie, LabelList, ResponsiveContainer } from "recharts";
 import axios from "../../config/axios";
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data = [
-  createData("00:00", 0),
-  createData("03:00", 300),
-  createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
-  createData("24:00", undefined),
-];
-console.log("🚀 ~ file: Chart.js ~ line 27 ~ data", data);
 
 export default function Chart() {
-  const theme = useTheme();
-  const [count, setCount] = useState([]);
-  console.log("🚀 ~ file: Chart.js ~ line 31 ~ Chart ~ count", count);
+  const [counts, setCount] = useState([]);
+
   useEffect(() => {
-    axios.get("/user/count").then((response) => {
-      setCount(response.data);
+    axios.get("/contact/count").then((response) => {
+      const data = response.data.map((item) => {
+        const color = `rgb(${Math.floor(Math.random() * 256)},${Math.floor(
+          Math.random() * 256
+        )},${Math.floor(Math.random() * 256)})`;
+
+        return {
+          course: item.course,
+          count: parseInt(item.count),
+          fill: color,
+        };
+      });
+      setCount(data);
     });
   }, []);
 
   return (
     <ResponsiveContainer>
-      <LineChart
-        data={count}
-        margin={{
-          top: 16,
-          right: 16,
-          bottom: 0,
-          left: 24,
-        }}
-      >
-        <XAxis
-          dataKey="date"
-          stroke={theme.palette.text.secondary}
-          style={theme.typography.body2}
-        />
-        <YAxis
-          stroke={theme.palette.text.secondary}
-          style={theme.typography.body2}
-        >
-          <Label
-            angle={270}
-            position="left"
-            style={{
-              textAnchor: "middle",
-              fill: theme.palette.text.primary,
-              ...theme.typography.body1,
-            }}
-          >
-            Daily Visitors
-          </Label>
-        </YAxis>
-        <Line
-          isAnimationActive={false}
-          type="monotone"
-          dataKey="value"
-          stroke={theme.palette.primary.main}
-          dot={false}
-        />
-      </LineChart>
+      <ResponsiveContainer>
+        {counts.length > 0 ? (
+          <PieChart width={730} height={250}>
+            <Pie
+              data={counts}
+              dataKey="count"
+              nameKey="course"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+            >
+              {" "}
+              <LabelList dataKey="course" position="top" />
+            </Pie>
+          </PieChart>
+        ) : (
+          <Box my={10}>
+            <Typography
+              variant="h3"
+              color="text.secondary"
+              fontFamily="PoppinsBold"
+              gutterBottom
+              style={{ textAlign: "center" }}
+            >
+              No Inquiry
+            </Typography>
+          </Box>
+        )}
+      </ResponsiveContainer>
     </ResponsiveContainer>
   );
 }

@@ -69,7 +69,7 @@ export default function AddAdmin(props) {
         fontFamily="PoppinsBold"
         gutterBottom
       >
-        Courses
+        User
       </Typography>
 
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>

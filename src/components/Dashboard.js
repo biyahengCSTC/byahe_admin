@@ -18,7 +18,7 @@ export default function Dashboard() {
   const handleNav = (event, index) => {
     switch (index) {
       case 1:
-        window.location.href = "/admin/courses";
+        window.location.href = "/admin/feedback";
         break;
       case 2:
         window.location.href = "/admin/campuses";
@@ -65,7 +65,7 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 25 }}>
             <Typography
-              variant="h6"
+              variant="h3"
               color="primary"
               fontFamily="PoppinsBold"
               gutterBottom
@@ -74,7 +74,7 @@ export default function Dashboard() {
             </Typography>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={7} lg={7}>
                 <Paper
                   sx={{
                     p: 2,
@@ -86,7 +86,7 @@ export default function Dashboard() {
                   <Chart />
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={5} lg={5}>
                 <Paper
                   sx={{
                     p: 2,

@@ -17,7 +17,7 @@ export default function Course() {
   const handleNav = (event, index) => {
     switch (index) {
       case 1:
-        window.location.href = "/admin/courses";
+        window.location.href = "/admin/feedback";
         break;
       case 2:
         window.location.href = "/admin/campuses";

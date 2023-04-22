@@ -89,7 +89,7 @@ export default function NavBar(props) {
 
   const sideBar = [
     { name: "Dashboard", icon: <Dashboard />, path: "/admin/dashboard" },
-    { name: "Courses", icon: <School />, path: "/admin/courses" },
+    { name: "User Feedback", icon: <School />, path: "/admin/feedback" },
     { name: "Campuses", icon: <Apartment />, path: "/admin/campuses" },
     {
       name: "Frequently ask Question",
